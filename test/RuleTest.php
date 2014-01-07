@@ -32,5 +32,11 @@ class RuleTest extends PHPUnit_Framework_TestCase{
       $actual = $this->rule->nextGeneration(FALSE,3);
       $this->assertEquals($expected,$actual);
     }
+
+    function testRuleFourGiveDeadCellAndTwoNeighborWhenCallNextGenerationThenReturnDeadCell(){
+      $expected = FALSE;
+      $actual = $this->rule->nextGeneration(FALSE,2);
+      $this->assertEquals($expected,$actual);
+    }
   }
 ?>
