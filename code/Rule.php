@@ -1,7 +1,7 @@
 <?php
   class Rule{
     function nextGeneration($statusOfCell,$numberOfNeighbor){
-      if($numberOfNeighbor == 2)
+      if( $numberOfNeighbor == 2 || $numberOfNeighbor == 3 )
         return TRUE;
     }
   }
