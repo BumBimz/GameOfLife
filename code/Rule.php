@@ -1,10 +1,13 @@
 <?php
   class Rule{
-    function nextGeneration($statusOfCell,$numberOfNeighbor){
-      if( $numberOfNeighbor == 2 && $statusOfCell == TRUE )
-        return TRUE;
-      if( $numberOfNeighbor == 3 )
-        return TRUE;
+    function __construct(){
+      $this->checkNeighbor = [FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,];
     }
+
+    function nextGeneration($statusOfCell,$numberOfNeighbor){
+      $this->checkNeighbor[2] = $statusOfCell;
+      return $this->checkNeighbor[$numberOfNeighbor];
+    }
+
   }
 ?>
