@@ -12,6 +12,8 @@
       $neighbor = 0;
       $sightX = [$x-1,$x+1];
       $sightY = [$y-1,$y+1];
+      if($x==0) $sightX[0] = $x;
+      if($y==0) $sightY[0] = $y;
       for($i = $sightX[0];$i <= $sightX[1];$i++){
         for($j = $sightY[0];$j <= $sightY[1];$j++){
           if($i!=$x||$j!=$y)
