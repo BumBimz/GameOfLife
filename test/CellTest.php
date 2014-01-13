@@ -40,5 +40,11 @@ class CellTest extends PHPUnit_Framework_TestCase{
       $actual = $this->cell->sight(0,4);
       $this->assertEquals($expected,$actual);
     }
+    
+    function testSightCellWhenUnderRightBoardThenReturnThree(){
+      $expected = 2;
+      $actual = $this->cell->sight(4,4);
+      $this->assertEquals($expected,$actual);
+    }
   }
 ?>
