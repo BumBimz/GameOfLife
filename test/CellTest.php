@@ -9,6 +9,23 @@
       $this->assertEquals($expected,$actual);
     }
 
+    function testSetUniverWhenGetUniverThenReturnUnivers(){
+      $univers=[[TRUE,TRUE,TRUE,TRUE,TRUE],
+                  [TRUE,TRUE,TRUE,TRUE,TRUE],
+                  [TRUE,TRUE,TRUE,FALSE,TRUE],
+                  [TRUE,FALSE,TRUE,TRUE,FALSE],
+                  [TRUE,TRUE,TRUE,TRUE,TRUE]];
+      
+      $expected=[[TRUE,TRUE,TRUE,TRUE,TRUE],
+                  [TRUE,TRUE,TRUE,TRUE,TRUE],
+                  [TRUE,TRUE,TRUE,FALSE,TRUE],
+                  [TRUE,FALSE,TRUE,TRUE,FALSE],
+                  [TRUE,TRUE,TRUE,TRUE,TRUE]];
+      $cell = new Cell();
+      $cell->setUnivers($univers);
+      $actual = $cell->univers;
+      $this->assertEquals($expected,$actual);
+    }
     function testSightCellWhenMiddleBoardThenReturnEight(){
       $boardCell=[[TRUE,TRUE,TRUE,TRUE,TRUE],
                   [TRUE,TRUE,TRUE,TRUE,TRUE],
@@ -17,7 +34,21 @@
                   [TRUE,TRUE,TRUE,TRUE,TRUE]];
       $expected = 8;
       $cell = new Cell();
+      $cell->setUnivers($boardCell);
       $actual = $cell->sight(1,1);
+      $this->assertEquals($expected,$actual);
+    }
+    
+    function testSightCellWhenMiddleBoardThenReturnSeven(){
+      $boardCell=[[TRUE,TRUE,TRUE,TRUE,TRUE],
+                  [TRUE,TRUE,TRUE,TRUE,TRUE],
+                  [TRUE,TRUE,TRUE,FALSE,TRUE],
+                  [TRUE,FALSE,TRUE,TRUE,FALSE],
+                  [TRUE,TRUE,TRUE,TRUE,TRUE]];
+      $expected = 7;
+      $cell = new Cell();
+      $cell->setUnivers($boardCell);
+      $actual = $cell->sight(1,2);
       $this->assertEquals($expected,$actual);
     }
   }
