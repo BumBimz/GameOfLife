@@ -10,40 +10,25 @@ class CellTest extends PHPUnit_Framework_TestCase{
       $this->cell->setUnivers($univers);
     }
 
+    function ProviderSight(){
+      $input = [[1,1,8],
+        [1,2,7],
+        [0,0,3],
+        [0,4,3],
+        [4,4,2]];
+      return $input;
+    }
     function testCheckStatusCellWhenPositionAliveCellThenReturnAliveCell(){
       $expected = TRUE;
       $actual = $this->cell->checkStatusCell($this->cell->univers[0][0]);
       $this->assertEquals($expected,$actual);
     }
 
-    function testSightCellWhenMiddleBoardThenReturnEight(){
-      $expected = 8;
-      $actual = $this->cell->sight(1,1);
-      $this->assertEquals($expected,$actual);
-    }
-    
-    function testSightCellWhenMiddleBoardThenReturnSeven(){
-      $expected = 7;
-      $actual = $this->cell->sight(1,2);
-      $this->assertEquals($expected,$actual);
-    }
-
-
-    function testSightCellWhenTopLeftBoardThenReturnThree(){
-      $expected = 3;
-      $actual = $this->cell->sight(0,0);
-      $this->assertEquals($expected,$actual);
-    }
-
-    function testSightCellWhenTopRightBoardThenReturnThree(){
-      $expected = 3;
-      $actual = $this->cell->sight(0,4);
-      $this->assertEquals($expected,$actual);
-    }
-    
-    function testSightCellWhenUnderRightBoardThenReturnThree(){
-      $expected = 2;
-      $actual = $this->cell->sight(4,4);
+    /**
+     * @dataProvider ProviderSight
+     */
+    function testSightCellWhenAddPositionThenReturnExpected($x,$y,$expected){
+      $actual = $this->cell->sight($x,$y);
       $this->assertEquals($expected,$actual);
     }
   }

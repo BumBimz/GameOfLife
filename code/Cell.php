@@ -10,19 +10,52 @@
 
     function sight($x,$y){
       $neighbor = 0;
-      $sightX = [$x-1,$x+1];
-      $sightY = [$y-1,$y+1];
-      if($x==0) $sightX[0] = $x;
-      if($y==0) $sightY[0] = $y;
-      if($x==sizeof($this->univers)-1) $sightX[1] = $x;
-      if($y==sizeof($this->univers[0])-1) $sightY[1] = $y;
-      for($i = $sightX[0];$i <= $sightX[1];$i++){
-        for($j = $sightY[0];$j <= $sightY[1];$j++){
-          if($i!=$x||$j!=$y)
-            $neighbor+= $this->checkStatusCell($this->univers[$i][$j]);
+      $this->setScope($x,$y); 
+      for($i = $this->sightX[0];$i <= $this->sightX[1];$i++){
+        for($j = $this->sightY[0];$j <= $this->sightY[1];$j++){
+          $neighbor += $this->checkNeighbor($i,$j,$x,$y);
         }
       }
       return $neighbor;
+    }
+
+    function setScope($x,$y){
+      $this->sightX[0] = $this->setFirstPosition($x);
+      $this->sightY[0] = $this->setFirstPosition($y);
+      $check = $this->checkmore(sizeof($this->univers)-1,$x);
+      $this->sightX[1] = $this->setLastposition($x,$check);
+      $check = $this->checkmore(sizeof($this->univers[0])-1,$y);
+      $this->sightY[1] = $this->setLastposition($y,$check);
+    }
+
+    function setFirstPosition($value){
+      $check = $this->checkMore($value,0);
+      $setFirst = [$value,$value-1];
+      return $setFirst[$check*1];
+    }
+
+    function checkMore($first,$second){
+      return $first > $second;
+    }
+
+    function setLastPosition($value,$check){
+      $setFirst = [$value,$value+1];
+      return $setFirst[$check*1];
+    }
+
+    function checkNeighbor($i,$j,$x,$y){
+      $resultX = $this->checkEquals($i,$x);
+      $resultY = $this->checkEquals($j,$y);
+      $resultNand = $this->checkNand($resultX,$resultY);
+      return $resultNand == $this->univers[$i][$j];
+    }
+
+    function checkEquals($first,$second){
+      return $first == $second;
+    }
+
+    function checkNand($first,$second){
+      return $first*$second == 0;
     }
   }
 ?>
