@@ -28,5 +28,9 @@
     function setUniverse($universe){
       $this->universe = $universe;
     }
+
+    function lookAround($x,$y){
+      return 8;
+    }
   }
 ?>

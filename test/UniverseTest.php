@@ -38,5 +38,16 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
       $actual = $this->universe->universe[0][0];
       $this->assertTrue($actual);
     }
+
+    function testCellLookAroundWhenAddPositionOneOneUniverseThenReturnEightNeighbor(){
+      $expected = 8;
+      $univers=[[TRUE,TRUE,TRUE,TRUE,TRUE],
+                [TRUE,TRUE,TRUE,TRUE,TRUE],
+                [TRUE,TRUE,TRUE,FALSE,TRUE],
+                [TRUE,FALSE,TRUE,TRUE,FALSE],
+                [TRUE,TRUE,TRUE,TRUE,TRUE]];
+      $actual = $this->universe->lookAround(1,1);
+      $this->assertEquals($expected,$actual);
+    }
   }
 ?>
