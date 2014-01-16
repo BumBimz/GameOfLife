@@ -31,10 +31,8 @@
 
     function lookAround($x,$y){
       $neighbor = 0;
-      $scopeX = [$x-1,$x+1];
-      $scopeY = [$y-1,$y+1];
-      if($scopeX[0]<0) $scopeX[0] = $x;
-      if($scopeY[0]<0) $scopeY[0] = $y;
+      $scopeX = $this->setScope($x);
+      $scopeY = $this->setScope($y);
       for($i=$scopeX[0];$i<=$scopeX[1];$i++){
         for($j=$scopeY[0];$j<=$scopeY[1];$j++){
           if(($i==$x && $j==$y) == FALSE)
@@ -42,6 +40,13 @@
         }
       }
       return $neighbor;
+    }
+
+    function setScope($position){
+      $scope = [$position-1,$position+1];
+      if($scope[0]<0)
+        $scope[0] = $position;
+      return $scope;
     }
   }
 ?>

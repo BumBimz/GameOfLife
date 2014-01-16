@@ -11,6 +11,14 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
                 [TRUE,TRUE,TRUE,TRUE,TRUE]];
       $this->universe->setUniverse($univers);
     }
+
+    function providerLookAround(){
+     $input = [[1,1,8],
+               [1,2,7],
+               [0,0,3]];
+     return $input;
+    }
+
     function testGetCellWhenRandomIsOneThenReturnAliveCell(){
       $this->randomer->expects($this->once())
         ->method('random')
@@ -21,7 +29,7 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
     }
 
     function testCreateUniverseWhenUniverseIsFiveXFourThenReturnTwentyCell(){
-      $excepted = [[TRUE,TRUE,TRUE,TRUE,TRUE],
+      $expected = [[TRUE,TRUE,TRUE,TRUE,TRUE],
        [TRUE,TRUE,TRUE,TRUE,TRUE],
        [TRUE,TRUE,TRUE,TRUE,TRUE],
        [TRUE,TRUE,TRUE,TRUE,TRUE]];
@@ -32,7 +40,7 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
       $this->universe->setWidthUniverse(5);
       $this->universe->setRandomer($this->randomer);
       $actual = $this->universe->createUniverse();
-      $this->assertEquals($excepted,$actual);
+      $this->assertEquals($expected,$actual);
     }
 
     function testSetUniverseWhenPositionAliveCellThenReturnAliveCell(){
@@ -45,21 +53,11 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
       $this->assertTrue($actual);
     }
 
-    function testCellLookAroundWhenAddPositionOneOneUniverseThenReturnEightNeighbor(){
-      $expected = 8;
-      $actual = $this->universe->lookAround(1,1);
-      $this->assertEquals($expected,$actual);
-    }
-    
-    function testCellLookAroundWhenAddPositionOneTwoUniverseThenReturnSevenNeighbor(){
-      $expected = 7;
-      $actual = $this->universe->lookAround(1,2);
-      $this->assertEquals($expected,$actual);
-    }
-
-    function testCellLookAroundWhenAddPositionTopLeftUniverseThenReturnThreeNeighbor(){
-      $expected = 3;
-      $actual = $this->universe->lookAround(0,0);
+    /**
+     * @dataProvider providerLookAround
+     */
+    function testCellLookAroundWhenAddPositionOneOneUniverseThenReturnEightNeighbor($x,$y,$expected){
+      $actual = $this->universe->lookAround($x,$y);
       $this->assertEquals($expected,$actual);
     }
 
