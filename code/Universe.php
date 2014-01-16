@@ -24,5 +24,9 @@
     function getCell(){
       return $this->randomer->random() == 1;
     }
+
+    function setUniverse($universe){
+      $this->universe = $universe;
+    }
   }
 ?>

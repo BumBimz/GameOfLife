@@ -27,5 +27,16 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
       $actual = $this->universe->createUniverse();
       $this->assertEquals($excepted,$actual);
     }
+
+    function testSetUniverseWhenPositionAliveCellThenReturnAliveCell(){
+      $univers=[[TRUE,TRUE,TRUE,TRUE,TRUE],
+                [TRUE,TRUE,TRUE,TRUE,TRUE],
+                [TRUE,TRUE,TRUE,FALSE,TRUE],
+                [TRUE,FALSE,TRUE,TRUE,FALSE],
+                [TRUE,TRUE,TRUE,TRUE,TRUE]];
+      $this->universe->setUniverse($univers);
+      $actual = $this->universe->universe[0][0];
+      $this->assertTrue($actual);
+    }
   }
 ?>
