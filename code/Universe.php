@@ -31,8 +31,12 @@
 
     function lookAround($x,$y){
       $neighbor = 0;
-      for($i=$x-1;$i<=$x+1;$i++){
-        for($j=$y-1;$j<=$y+1;$j++){
+      $scopeX = [$x-1,$x+1];
+      $scopeY = [$y-1,$y+1];
+      if($scopeX[0]<0) $scopeX[0] = $x;
+      if($scopeY[0]<0) $scopeY[0] = $y;
+      for($i=$scopeX[0];$i<=$scopeX[1];$i++){
+        for($j=$scopeY[0];$j<=$scopeY[1];$j++){
           if(($i==$x && $j==$y) == FALSE)
             $neighbor += $this->universe[$i][$j];
         }

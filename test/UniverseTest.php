@@ -57,5 +57,11 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
       $this->assertEquals($expected,$actual);
     }
 
+    function testCellLookAroundWhenAddPositionTopLeftUniverseThenReturnThreeNeighbor(){
+      $expected = 3;
+      $actual = $this->universe->lookAround(0,0);
+      $this->assertEquals($expected,$actual);
+    }
+
   }
 ?>
