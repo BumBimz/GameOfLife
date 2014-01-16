@@ -3,6 +3,13 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
     function setUp(){
       $this->universe = new Universe();
       $this->randomer = $this->getMock('Randomer',array('random'));
+
+      $univers=[[TRUE,TRUE,TRUE,TRUE,TRUE],
+                [TRUE,TRUE,TRUE,TRUE,TRUE],
+                [TRUE,TRUE,TRUE,FALSE,TRUE],
+                [TRUE,FALSE,TRUE,TRUE,FALSE],
+                [TRUE,TRUE,TRUE,TRUE,TRUE]];
+      $this->universe->setUniverse($univers);
     }
     function testGetCellWhenRandomIsOneThenReturnAliveCell(){
       $this->randomer->expects($this->once())
@@ -34,33 +41,21 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
                 [TRUE,TRUE,TRUE,FALSE,TRUE],
                 [TRUE,FALSE,TRUE,TRUE,FALSE],
                 [TRUE,TRUE,TRUE,TRUE,TRUE]];
-      $this->universe->setUniverse($univers);
       $actual = $this->universe->universe[0][0];
       $this->assertTrue($actual);
     }
 
     function testCellLookAroundWhenAddPositionOneOneUniverseThenReturnEightNeighbor(){
       $expected = 8;
-      $univers=[[TRUE,TRUE,TRUE,TRUE,TRUE],
-                [TRUE,TRUE,TRUE,TRUE,TRUE],
-                [TRUE,TRUE,TRUE,FALSE,TRUE],
-                [TRUE,FALSE,TRUE,TRUE,FALSE],
-                [TRUE,TRUE,TRUE,TRUE,TRUE]];
-      $this->universe->setUniverse($univers);
       $actual = $this->universe->lookAround(1,1);
       $this->assertEquals($expected,$actual);
     }
     
     function testCellLookAroundWhenAddPositionOneTwoUniverseThenReturnSevenNeighbor(){
       $expected = 7;
-      $univers=[[TRUE,TRUE,TRUE,TRUE,TRUE],
-                [TRUE,TRUE,TRUE,TRUE,TRUE],
-                [TRUE,TRUE,TRUE,FALSE,TRUE],
-                [TRUE,FALSE,TRUE,TRUE,FALSE],
-                [TRUE,TRUE,TRUE,TRUE,TRUE]];
-      $this->universe->setUniverse($univers);
       $actual = $this->universe->lookAround(1,2);
       $this->assertEquals($expected,$actual);
     }
+
   }
 ?>

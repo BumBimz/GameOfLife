@@ -33,7 +33,7 @@
       $neighbor = 0;
       for($i=$x-1;$i<=$x+1;$i++){
         for($j=$y-1;$j<=$y+1;$j++){
-          if(($i!=$x || $j!=$y) == TRUE)
+          if(($i==$x && $j==$y) == FALSE)
             $neighbor += $this->universe[$i][$j];
         }
       }
