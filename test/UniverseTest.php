@@ -1,13 +1,15 @@
 <?php
-  class UniverseTest extends PHPUnit_Framework_TestCase{
+class UniverseTest extends PHPUnit_Framework_TestCase{
+    function setUp(){
+      $this->universe = new Universe();
+      $this->randomer = $this->getMock('Randomer',array('random'));
+    }
     function testGetCellWhenRandomIsOneThenReturnAliveCell(){
-      $randomer = $this->getMock('Randomer',array('random'));
-      $randomer->expects($this->once())
+      $this->randomer->expects($this->once())
         ->method('random')
         ->will($this->returnValue(1));
-      $universe = new Universe();
-      $universe->setRandomer($randomer);
-      $actual = $universe->getCell();
+      $this->universe->setRandomer($this->randomer);
+      $actual = $this->universe->getCell();
       $this->assertTrue($actual);
     }
 
@@ -16,16 +18,14 @@
        [TRUE,TRUE,TRUE,TRUE,TRUE],
        [TRUE,TRUE,TRUE,TRUE,TRUE],
        [TRUE,TRUE,TRUE,TRUE,TRUE]];
-      $randomer = $this->getMock('Randomer',array('random'));
-      $randomer->expects($this->exactly(20))
+      $this->randomer->expects($this->exactly(20))
         ->method('random')
         ->will($this->returnValue(1));
-      $universe = new Universe();
-      $universe->setHeightUniverse(4);
-      $universe->setWidthUniverse(5);
-      $universe->setRandomer($randomer);
-      $universe->createUniverse();
-      $this->assertEquals($excepted,$universe->universe);
+      $this->universe->setHeightUniverse(4);
+      $this->universe->setWidthUniverse(5);
+      $this->universe->setRandomer($this->randomer);
+      $this->universe->createUniverse();
+      $this->assertEquals($excepted,$this->universe->universe);
     }
   }
 ?>
