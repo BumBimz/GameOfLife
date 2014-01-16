@@ -16,7 +16,8 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
      $input = [[1,1,8],
                [1,2,7],
                [0,0,3],
-               [0,4,3]];
+               [0,4,3],
+               [4,4,2]];
      return $input;
     }
 
