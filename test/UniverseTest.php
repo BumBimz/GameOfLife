@@ -15,7 +15,8 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
     function providerLookAround(){
      $input = [[1,1,8],
                [1,2,7],
-               [0,0,3]];
+               [0,0,3],
+               [0,4,3]];
      return $input;
     }
 
