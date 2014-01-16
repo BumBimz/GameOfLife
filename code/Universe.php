@@ -3,7 +3,7 @@
     function setHeightUniverse($heightUniverse){
       $this->heightUniverse =$heightUniverse;
     }
-    
+
     function setWidthUniverse($widthUniverse){
       $this->widthUniverse =$widthUniverse;
     }
@@ -33,24 +33,53 @@
 
     function lookAround($x,$y){
       $neighbor = 0;
-      $scopeX = $this->setScope($x,$this->heightUniverse);
-      $scopeY = $this->setScope($y,$this->widthUniverse);
+      $maxX = $this->heightUniverse-1;
+      $maxY = $this->widthUniverse-1;
+      $scopeX = $this->setScope($x,$maxX);
+      $scopeY = $this->setScope($y,$maxY);
       for($i=$scopeX[0];$i<=$scopeX[1];$i++){
         for($j=$scopeY[0];$j<=$scopeY[1];$j++){
-          if(($i==$x && $j==$y) == FALSE)
-            $neighbor += $this->universe[$i][$j];
+         $checkPosition = $this->checkPosition($i,$j,$x,$y);
+         $neighbor += $this->checkEquals($checkPosition,$this->universe[$i][$j]);
         }
       }
       return $neighbor;
     }
 
     function setScope($position,$max){
-      $scope = [$position-1,$position+1];
-      if($scope[0]<0)
-        $scope[0] = $position;
-      if($scope[1]==$max)
-        $scope[1] = $position;
+      $scope[0] = $this->setFirstPosition($position);
+      $scope[1] = $this->setLastPosition($position,$max);
       return $scope;
+    }
+
+    function setFirstPosition($position){
+      $check = $this->checkMore($position,0);
+      $setFirstPosition = [$position,$position-1];
+      return $setFirstPosition[$check];
+    }
+    
+    function setLastPosition($position,$max){
+      $check = $this->checkMore($max,$position);
+      $setLastPosition = [$position,$position+1];
+      return $setLastPosition[$check];
+    }
+
+    function checkMore($first,$second){
+      return $first>$second;
+    }
+
+    function checkPosition($i,$j,$x,$y){
+      $checkX = $this->checkEquals($i,$x);
+      $checkY = $this->checkEquals($j,$y);
+      $checkNand = $this->checkNand($checkX,$checkY);
+      return $checkNand;
+    }    
+    function checkEquals($first,$second){
+      return $first == $second;
+    }
+
+    function checkNand($first,$second){
+      return $first*$second == 0;
     }
   }
 ?>

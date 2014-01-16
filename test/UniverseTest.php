@@ -62,6 +62,5 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
       $actual = $this->universe->lookAround($x,$y);
       $this->assertEquals($expected,$actual);
     }
-
   }
 ?>
