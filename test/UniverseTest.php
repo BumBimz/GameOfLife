@@ -24,8 +24,8 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
       $this->universe->setHeightUniverse(4);
       $this->universe->setWidthUniverse(5);
       $this->universe->setRandomer($this->randomer);
-      $this->universe->createUniverse();
-      $this->assertEquals($excepted,$this->universe->universe);
+      $actual = $this->universe->createUniverse();
+      $this->assertEquals($excepted,$actual);
     }
   }
 ?>
