@@ -58,7 +58,7 @@ class UniverseTest extends PHPUnit_Framework_TestCase{
     /**
      * @dataProvider providerLookAround
      */
-    function testCellLookAroundWhenAddPositionOneOneUniverseThenReturnEightNeighbor($x,$y,$expected){
+    function testCellLookAroundWhenAddPositionCellThenReturnExpected($x,$y,$expected){
       $actual = $this->universe->lookAround($x,$y);
       $this->assertEquals($expected,$actual);
     }
